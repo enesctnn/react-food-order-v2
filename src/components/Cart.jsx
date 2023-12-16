@@ -1,27 +1,19 @@
-import { useEffect, useRef } from 'react';
-import { uiActions } from '../store/uiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from './UI/Button';
 import CartItem from './CartItem';
 import { cartActions } from '../store/cartSlice';
+import Modal from './UI/Modal';
 
 function Cart({ cartQuantity }) {
-  const dialog = useRef();
   const dispatch = useDispatch();
-  const { isCartOpen } = useSelector((state) => state.ui);
+
   const { cart } = useSelector((state) => state.cart);
 
-  useEffect(() => {
-    const modal = dialog.current;
-    if (isCartOpen) {
-      modal.showModal();
-    }
-  }, [isCartOpen]);
-
-  function handleModalClose() {
-    dialog.current.close();
-    dispatch(uiActions.closeModal());
-  }
+  const total = cart.reduce(
+    (totalPrice, item) =>
+      (totalPrice += Number(item.price) * item.quantity * 100),
+    0
+  );
 
   function handleAddItem(id) {
     dispatch(cartActions.addToCart({ id }));
@@ -46,6 +38,9 @@ function Cart({ cartQuantity }) {
         </ul>
       </section>
       <form method="dialog" className="text-right ">
+        <p className="p-1 font-bold text-green-500 text-lg hover:underline">
+          ${(total / 100).toFixed(2)}
+        </p>
         <Button textOnly>Close</Button>
         <Button type="button" className="rounded-sm ml-5">
           Submit
@@ -68,15 +63,7 @@ function Cart({ cartQuantity }) {
       </>
     );
   }
-  return (
-    <dialog
-      className="backdrop:bg-yellow-900 backdrop:opacity-70 rounded-md p-3"
-      ref={dialog}
-      onClose={handleModalClose}
-    >
-      {content}
-    </dialog>
-  );
+  return <Modal className="animate-fade-in-slide-up">{content}</Modal>;
 }
 
 export default Cart;
