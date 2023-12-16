@@ -17,7 +17,7 @@ export default function Header() {
     (totalQuantity, item) => (totalQuantity += item.quantity),
     0
   );
-  
+
   return (
     <>
       <Cart cartQuantity={cartQuantity} />
@@ -26,7 +26,7 @@ export default function Header() {
           <img
             src={headerImg}
             alt="restaurant logo"
-            className="h-full rounded-3xl outline outline-2 outline-yellow-500"
+            className="h-full rounded-3xl outline outline-2 outline-yellow-500 "
           />
           <h1
             htmlFor="restaurant name"
@@ -36,8 +36,8 @@ export default function Header() {
           </h1>
         </div>
         <nav className="flex flex-row gap-4 items-end whitespace-nowrap">
-          <NavLink to="/sign-in" className={handleActiveLink}>
-            Sign in
+          <NavLink to="/login" className={handleActiveLink}>
+            Login
           </NavLink>
           <NavLink to="/foods" className={handleActiveLink}>
             FOODS

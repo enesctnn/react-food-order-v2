@@ -1,46 +1,11 @@
 {
   "users": [
     {
-      "id": 1,
-      "username": "admin",
-      "password": "password",
-      "role": "ROLE_ADMIN"
-    },
-    {
-      "id": 2,
-      "username": "employee",
-      "password": "password",
-      "role": "ROLE_EMPLOYEE"
-    },
-    {
-      "id": 3,
-      "username": "user1",
-      "password": "password",
-      "role": "ROLE_USER"
-    },
-    {
-      "id": 3,
-      "username": "user2",
-      "password": "password",
-      "role": "ROLE_USER"
-    },
-    {
-      "id": 3,
-      "username": "user2",
-      "password": "password",
-      "role": "ROLE_USER"
-    },
-    {
-      "username": "user1",
-      "password": "password",
-      "role": "ROLE_USER",
-      "id": 4
-    },
-    {
-      "username": "enes",
-      "password": "password111",
-      "role": "ROLE_USER",
-      "id": 5
+      "user-name": "enes",
+      "email": "enespcetin@gmail.com",
+      "password": "1234",
+      "role": "ROLE_ADMIN",
+      "id": 1
     }
   ],
   "foods": [

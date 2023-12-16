@@ -10,15 +10,17 @@ import RootLayout from './pages/Root';
 import ErrorPage from './pages/Error';
 import MealItems from './components/MealItems';
 import { queryClient } from './util/http';
-import SignIn from './pages/SignIn';
+import LoginPage from './pages/Login';
 import HomePage from './pages/Home';
+import SignUpPage from './pages/SignUp';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />} errorElement={<ErrorPage />}>
       <Route index element={<HomePage />} />
       <Route path="foods" element={<MealItems />} />
-      <Route path="sign-in" element={<SignIn />} />
+      <Route path="login" element={<LoginPage />} />
+      <Route path="sign-up" element={<SignUpPage />} />
     </Route>
   )
 );

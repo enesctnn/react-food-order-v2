@@ -8,7 +8,10 @@ export async function fetchFoods({ signal, searchTerm }) {
   if (searchTerm) {
     url += '?name=' + searchTerm;
   }
-  const response = await fetch(url, { signal });
+  const response = await fetch(url, {
+    method: 'GET',
+    signal,
+  });
 
   if (!response.ok) {
     throw new Error('Unable to fetch foods');
@@ -17,6 +20,18 @@ export async function fetchFoods({ signal, searchTerm }) {
   return await response.json();
 }
 
-export async function addOrder(){
-  
+export async function userLogin({ email, password }) {
+  const response = await fetch('http://localhost:3000/users');
+  const resData = await response.json();
+  if (!response.ok) {
+    throw new Error('Could not reach User Info');
+  }
+
+  const existingUserData = resData.filter((user) => {
+    user.email === email && user.password === password;
+  });
+
+  return existingUserData;
 }
+
+export async function addOrder() {}
