@@ -1,39 +1,23 @@
-import { Link } from 'react-router-dom';
+import { Form, Link, redirect } from 'react-router-dom';
 import Button from '../components/UI/Button';
 import Input from '../components/UI/Input';
-import { useMutation } from '@tanstack/react-query';
-import { userLogin } from '../util/http';
-import { uiActions } from '../store/uiSlice';
+
 import { useDispatch } from 'react-redux';
+import { userLogin } from '../util/http';
 
 export default function LoginPage() {
   const dispatch = useDispatch();
 
-  const { mutate, isError, error } = useMutation({
-    mutationFn: userLogin,
-    onMutate: (data) => {
-      dispatch(uiActions.setUser({ user: data }));
-    },
-    onError: (error, data, context) => {
-      dispatch(uiActions.setUser({ user: {} }));
-    },
-  });
-
-  async function handleSubmition(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const inputObject = Object.fromEntries(formData);
-
-    mutate({ ...inputObject });
-  }
-  if (isError) {
-    throw new Error(error.message);
-  }
+  // function handleSubmition(event) {
+  //   event.preventDefault();
+  //   const formData = new FormData(event.target);
+  //   const inputObject = Object.fromEntries(formData);
+  // }
 
   return (
-    <form
-      onSubmit={handleSubmition}
+    <Form
       className="flex flex-col justify-center items-center animate-fade-in-slide-up"
+      method="POST"
     >
       <div className="flex flex-col gap-5 py-3 px-8 shadow-lg shadow-stone-700">
         <Input name="email" label="E-mail" type="email" required />
@@ -45,6 +29,16 @@ export default function LoginPage() {
           <Button className=" ml-5 text-xl">Login</Button>
         </div>
       </div>
-    </form>
+    </Form>
   );
+}
+
+export async function action({ request, params }) {
+  const formData = await request.formData();
+  const userData = await userLogin({
+    email: formData.get('email'),
+    password: formData.get('password'),
+  });
+  console.log(userData);
+  return redirect('/foods');
 }

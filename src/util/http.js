@@ -27,9 +27,9 @@ export async function userLogin({ email, password }) {
     throw new Error('Could not reach User Info');
   }
 
-  const existingUserData = resData.filter((user) => {
-    user.email === email && user.password === password;
-  });
+  const existingUserData = resData.filter(
+    (user) => user.email === email && user.password === password
+  );
 
   return existingUserData;
 }
