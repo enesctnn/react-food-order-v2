@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   isCartOpen: false,
-  userLoggedIn: {},
 };
 
 const uiSlice = createSlice({
@@ -14,9 +13,6 @@ const uiSlice = createSlice({
     },
     closeModal: (state) => {
       state.isCartOpen = false;
-    },
-    setUser: (state, action) => {
-      state.userLoggedIn = { ...action.payload.user };
     },
   },
 });

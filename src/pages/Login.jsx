@@ -2,12 +2,9 @@ import { Form, Link, redirect } from 'react-router-dom';
 import Button from '../components/UI/Button';
 import Input from '../components/UI/Input';
 
-import { useDispatch } from 'react-redux';
 import { userLogin } from '../util/http';
 
 export default function LoginPage() {
-  const dispatch = useDispatch();
-
   // function handleSubmition(event) {
   //   event.preventDefault();
   //   const formData = new FormData(event.target);
@@ -39,6 +36,8 @@ export async function action({ request, params }) {
     email: formData.get('email'),
     password: formData.get('password'),
   });
-  console.log(userData);
+
+  localStorage.setItem('USER_DATA', JSON.stringify(userData));
+
   return redirect('/foods');
 }

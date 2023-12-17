@@ -1,15 +1,21 @@
-function Input({ name, label, ...props }) {
+function Input({ name, label, className, textarea, ...props }) {
+  const style = `bg-yellow-100 bg-opacity-80 outline-none pl-1 focus:shadow-inner focus:shadow-yellow-950 rounded-sm  ${className}`;
+  let input = (
+    <input {...props} name={name} className={style + ' duration-300'} />
+  );
+
+  if (textarea) {
+    input = (
+      <textarea {...props} name={name} className={style + ' duration-75'} />
+    );
+  }
+
   return (
     <section className="flex flex-col gap-1 ">
       <label htmlFor={name} className="text-xl text-yellow-200 font-bold">
         {label} :
       </label>
-      <input
-        {...props}
-        
-        name={name}
-        className="bg-yellow-100 bg-opacity-80 outline-none pl-1 focus:shadow-inner focus:shadow-yellow-950 duration-300 rounded-sm"
-      />
+      {input}
     </section>
   );
 }

@@ -4,8 +4,23 @@
       "user-name": "enes",
       "email": "enespcetin@gmail.com",
       "password": "1234",
+      "street": "212.sk",
+      "city": "ANKARA",
+      "postal-code": "06020",
+      "adress": "hüseyingazi mah. 212 sok. c1 blok no:33 Mamak/Ankara",
       "role": "ROLE_ADMIN",
       "id": 1
+    },
+    {
+      "user-name": "nihat",
+      "email": "studyo_b@hotmail.com",
+      "password": "1234",
+      "street": "uzgörenler sk.",
+      "city": "ANKARA",
+      "postal-code": "06021",
+      "adress": "demirlibahce mah. uzgörenler sk. 6/A Foto Moda Mamak/Ankara",
+      "role": "ROLE_USER",
+      "id": 2
     }
   ],
   "foods": [

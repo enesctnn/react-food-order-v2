@@ -16,7 +16,7 @@ export default function HomePage() {
         <p>Please enjoy ordering meal from react food order.</p>
         <p>
           You can Sign-in/up and enjoy ordering your meal or you can order
-          <Link to="/foods" className="mr-1">
+          <Link to="/foods" className="mx-1">
             Food
           </Link>
           without <Link to="login"> Loging </Link>in.

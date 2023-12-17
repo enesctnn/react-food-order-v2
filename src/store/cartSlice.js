@@ -14,6 +14,7 @@ const cartSlice = createSlice({
       );
       if (existingItemIndex !== -1) {
         state.cart[existingItemIndex].quantity += 1;
+        localStorage.setItem('cart', JSON.stringify(state.cart));
         return;
       }
       state.cart.push({ ...action.payload.item, quantity: +1 });
@@ -28,6 +29,7 @@ const cartSlice = createSlice({
       if (state.cart[updatedItemIndex].quantity <= 0) {
         state.cart.splice(updatedItemIndex, 1);
       }
+      localStorage.setItem('cart', JSON.stringify(state.cart));
     },
   },
 });

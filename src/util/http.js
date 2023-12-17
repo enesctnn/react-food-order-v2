@@ -29,9 +29,17 @@ export async function userLogin({ email, password }) {
 
   const existingUserData = resData.filter(
     (user) => user.email === email && user.password === password
-  );
+  )[0];
 
-  return existingUserData;
+  return {
+    role: existingUserData.role,
+    'user-name': existingUserData['user-name'],
+    'postal-code': existingUserData['postal-code'],
+    adress: existingUserData.adress,
+    city: existingUserData.city,
+    street: existingUserData.street,
+    'user-id': existingUserData.id,
+  };
 }
 
 export async function addOrder() {}
