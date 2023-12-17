@@ -41,5 +41,23 @@ export async function userLogin({ email, password }) {
     'user-id': existingUserData.id,
   };
 }
+export async function signUpUser({ user, id }) {
+  try {
+    const response = await fetch('http://localhost:3000/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        ...user,
+        role: 'ROLE_USER',
+        id,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error('Could not Sign Up the user');
+    }
+  } catch (error) {
+    window.alert('Error during sign up:' + error.message);
+  }
+}
 
 export async function addOrder() {}

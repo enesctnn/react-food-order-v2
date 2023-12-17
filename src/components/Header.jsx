@@ -1,16 +1,25 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useRouteLoaderData, useSubmit } from 'react-router-dom';
 import Button from './UI/Button';
 import headerImg from '/logo.jpg';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiActions } from '../store/uiSlice';
 import Cart from './Cart';
+import { BiLogOutCircle } from 'react-icons/bi';
 
 export default function Header() {
   const dispatch = useDispatch();
+  const submit = useSubmit();
+
+  let isLoggedIn = useRouteLoaderData('root');
 
   function handleActiveLink({ isActive }) {
     return isActive ? 'underline decoration-2' : '';
   }
+
+  function handleLogout() {
+    submit(null, { method: 'POST', action: '/logout' });
+  }
+
   const { cart } = useSelector((state) => state.cart);
 
   const cartQuantity = cart.reduce(
@@ -36,9 +45,16 @@ export default function Header() {
           </h1>
         </div>
         <nav className="flex flex-row gap-4 items-end whitespace-nowrap">
-          <NavLink to="/login" className={handleActiveLink}>
-            Login
-          </NavLink>
+          {!isLoggedIn && (
+            <NavLink to="/login" className={handleActiveLink}>
+              Login
+            </NavLink>
+          )}
+          {isLoggedIn && (
+            <button onClick={handleLogout} className="absolute top-8 right-14">
+              <BiLogOutCircle size={26} />
+            </button>
+          )}
           <NavLink to="/foods" className={handleActiveLink}>
             FOODS
           </NavLink>

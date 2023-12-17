@@ -21,6 +21,17 @@
       "adress": "demirlibahce mah. uzgörenler sk. 6/A Foto Moda Mamak/Ankara",
       "role": "ROLE_USER",
       "id": 2
+    },
+    {
+      "user-name": "sevgi",
+      "email": "sevgictnn@gmail.com",
+      "password": "1234",
+      "city": "ankara",
+      "street": "inis",
+      "postal-code": "06022",
+      "adress": "demirlibahçe mahallesi iniş sokak lale apartmanı 6/16 Mamak /Ankara",
+      "id": 1702847417239,
+      "role": "ROLE_USER"
     }
   ],
   "foods": [
