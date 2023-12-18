@@ -23,7 +23,7 @@ export default function LoginPage() {
           <Link to="/sign-up" className="font-bold text-xl">
             Sign Up
           </Link>
-          <Button className=" ml-5 text-xl">Login</Button>
+          <Button className="ml-5 text-xl bg-stone-300">Login</Button>
         </div>
       </div>
     </Form>

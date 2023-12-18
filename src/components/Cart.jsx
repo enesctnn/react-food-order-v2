@@ -52,18 +52,24 @@ function Cart({ cartQuantity }) {
   if (cartQuantity <= 0) {
     content = (
       <>
-        <header>
-          <h2>Cart Is Empty</h2>
+        <header className="mb-5">
+          <h1 className="text-4xl text-stone-800">Cart Is Empty!</h1>
         </header>
-        <p>Looks like there is nothing to see in here</p>
-        <p>You can add foods on foods page if you want it</p>
+        <section className="leading-9 mb-10 text-2xl">
+          <p>Looks like there is nothing to see in here</p>
+          <p>You can add foods any time and order 7/24!</p>
+        </section>
         <form method="dialog">
-          <Button>GOT IT!!</Button>
+          <Button className=" bg-stone-400 font-bold hover:scale-110 hover:shadow-stone-600 hover:bg-stone-500 hover:shadow-sm duration-75">
+            GOT IT!!
+          </Button>
         </form>
       </>
     );
   }
-  return <Modal className="animate-fade-in-slide-up">{content}</Modal>;
+  return (
+    <Modal className="animate-fade-in-slide-up bg-stone-500">{content}</Modal>
+  );
 }
 
 export default Cart;

@@ -51,9 +51,14 @@ export default function Header() {
             </NavLink>
           )}
           {isLoggedIn && (
-            <button onClick={handleLogout} className="absolute top-8 right-14">
-              <BiLogOutCircle size={26} />
-            </button>
+            <p className="absolute top-8 right-8 group">
+              <button onClick={handleLogout}>
+                <BiLogOutCircle size={26} />
+              </button>
+              <div className="scale-0 group-hover:scale-100 text-gray-600 absolute -left-4 font-bold duration-100">
+                Logout
+              </div>
+            </p>
           )}
           <NavLink to="/foods" className={handleActiveLink}>
             FOODS

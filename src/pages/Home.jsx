@@ -1,11 +1,20 @@
-import { Link } from 'react-router-dom';
+import { Link, useRouteLoaderData } from 'react-router-dom';
 import plateOfFoodImg from '../assets/food-in-plate.png';
+import getUserData from '../ui/user-data';
 
 export default function HomePage() {
+  const isLoggedIn = useRouteLoaderData('root');
+  const user = getUserData();
+
   return (
     <main className="text-center animate-fade-slide-in-from-right flex flex-col h-max gap-5">
       <header className="w-screen h-96 flex flex-col gap-2 mb-10">
-        <h1>Welcome To React Food Order</h1>
+        <h1>
+          Welcome To React Food Order
+          {isLoggedIn ? (
+            <span className="uppercase mx-2">{`${user['user-name']}`}</span>
+          ) : undefined}
+        </h1>
         <img
           src={plateOfFoodImg}
           alt="plate of food"
@@ -13,14 +22,16 @@ export default function HomePage() {
         />
       </header>
       <article className="text-yellow-300 text-xl">
-        <p>Please enjoy ordering meal from react food order.</p>
-        <p>
-          You can Sign-in/up and enjoy ordering your meal or you can order
-          <Link to="/foods" className="mx-1">
-            Food
-          </Link>
-          without <Link to="login"> Loging </Link>in.
-        </p>
+        {isLoggedIn && <p>Please enjoy ordering meal from react food order.</p>}
+        {!isLoggedIn && (
+          <p>
+            You can Sign-in/up and enjoy ordering your meal or you can order
+            <Link to="/foods" className="mx-1">
+              Food
+            </Link>
+            without <Link to="login"> Loging </Link>in.
+          </p>
+        )}
       </article>
     </main>
   );

@@ -22,7 +22,11 @@ export default function MealItem({ food }) {
         </div>
         <p className="m-4 font-medium text-lg">{food.description}</p>
         <div className="mb-10 rounded-md overflow-hidden">
-          <Button key={food.id} onClick={() => handleAddItem(food)}>
+          <Button
+            key={food.id}
+            onClick={() => handleAddItem(food)}
+            className="bg-yellow-500"
+          >
             Add to Cart
           </Button>
         </div>

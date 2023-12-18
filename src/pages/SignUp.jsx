@@ -42,12 +42,12 @@ export default function SignUpPage() {
           {!isPending && (
             <Button
               type="reset"
-              className=" text-white bg-red-400 hover:bg-red-600 hover:scale-110 duration-75"
+              className=" text-white bg-red-700 hover:bg-red-600 duration-75"
             >
               Reset
             </Button>
           )}
-          <Button className=" bg-stone-600 hover:bg-stone-400 hover:text-stone-200 duration-150 text-xl font-medium">
+          <Button className="bg-stone-600 hover:bg-stone-400 hover:text-stone-200 hover:scale-110 duration-150 text-xl font-medium">
             {isPending ? 'Submitting...' : 'Register'}
           </Button>
         </menu>
