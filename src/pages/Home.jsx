@@ -5,7 +5,7 @@ import getUserData from '../ui/user-data';
 export default function HomePage() {
   const isLoggedIn = useRouteLoaderData('root');
   const user = getUserData();
-
+  const linkStyle = 'mx-1 duration-100 hover:text-yellow-200';
   return (
     <main className="text-center animate-fade-slide-in-from-right flex flex-col h-max gap-5">
       <header className="w-screen h-96 flex flex-col gap-2 mb-10">
@@ -26,10 +26,14 @@ export default function HomePage() {
         {!isLoggedIn && (
           <p>
             You can Sign-in/up and enjoy ordering your meal or you can order
-            <Link to="/foods" className="mx-1">
+            <Link to="/foods" className={linkStyle}>
               Food
             </Link>
-            without <Link to="login"> Loging </Link>in.
+            without
+            <Link to="login" className={linkStyle}>
+              Loging
+            </Link>
+            in.
           </p>
         )}
       </article>

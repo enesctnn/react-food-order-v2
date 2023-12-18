@@ -41,8 +41,10 @@ export async function userLogin({ email, password }) {
     'user-id': existingUserData.id,
   };
 }
+
 export async function signUpUser({ user, id }) {
-  try {
+  const userExistMessage = await userExistChecker({ email: user.email });
+  if (!userExistMessage) {
     const response = await fetch('http://localhost:3000/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -55,9 +57,35 @@ export async function signUpUser({ user, id }) {
     if (!response.ok) {
       throw new Error('Could not Sign Up the user');
     }
-  } catch (error) {
-    window.alert('Error during sign up:' + error.message);
   }
+  throw new Error(userExistMessage);
+}
+
+export async function userExistChecker({ email }) {
+  const url = 'http://localhost:3000/users?email=' + email;
+  try {
+    const response = await fetch(url);
+    const resData = await response.json();
+    if (!response.ok) {
+      throw new Error('An Error occurred during user fetch');
+    }
+    if (resData[0]) {
+      return 'This email adress is already in use!';
+    }
+    return null;
+  } catch (error) {
+    window.alert('User matching failed:' + error.message);
+  }
+  return null;
+}
+
+export async function getUsersData({ signal }) {
+  const response = await fetch('http://localhost:3000/users', { signal });
+  const resData = await response.json();
+  if (!response.ok) {
+    throw new Error('Could not get users');
+  }
+  return resData;
 }
 
 export async function addOrder() {}

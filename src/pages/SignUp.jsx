@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function SignUpPage() {
   const navigate = useNavigate();
-  const { mutate, isPending } = useMutation({
+  const { mutate, isPending, isError, error } = useMutation({
     mutationFn: signUpUser,
     onSuccess: () => {
       window.alert('User succesfully registered!!');
@@ -19,6 +19,9 @@ export default function SignUpPage() {
     const fd = new FormData(event.target);
     const formData = Object.fromEntries(fd);
     mutate({ user: { ...formData }, id: Date.now() });
+  }
+  if (isError) {
+    throw new Error(error);
   }
 
   return (

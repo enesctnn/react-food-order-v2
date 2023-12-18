@@ -24,8 +24,8 @@ function Cart({ cartQuantity }) {
 
   let content = (
     <>
-      <section className="text-left w-96 min-h-full flex flex-col gap-3 mb-8">
-        <h1>Your Cart</h1>
+      <section className="text-left min-h-full flex flex-col gap-3 mb-8">
+        <h1 className="text-4xl">Your Cart</h1>
         <ul className="flex flex-col gap-4">
           {cart.map((item) => (
             <CartItem
@@ -42,7 +42,7 @@ function Cart({ cartQuantity }) {
           ${(total / 100).toFixed(2)}
         </p>
         <Button textOnly>Close</Button>
-        <Button type="button" className="rounded-sm ml-5">
+        <Button type="button" className="ml-5 bg-yellow-400">
           Submit
         </Button>
       </form>
@@ -53,7 +53,9 @@ function Cart({ cartQuantity }) {
     content = (
       <>
         <header className="mb-5">
-          <h1 className="text-4xl text-stone-800">Cart Is Empty!</h1>
+          <h1 className="text-4xl text-stone-200 text-center">
+            Cart Is Empty!
+          </h1>
         </header>
         <section className="leading-9 mb-10 text-2xl">
           <p>Looks like there is nothing to see in here</p>
@@ -61,14 +63,22 @@ function Cart({ cartQuantity }) {
         </section>
         <form method="dialog">
           <Button className=" bg-stone-400 font-bold hover:scale-110 hover:shadow-stone-600 hover:bg-stone-500 hover:shadow-sm duration-75">
-            GOT IT!!
+            GOTCHA!
           </Button>
         </form>
       </>
     );
   }
   return (
-    <Modal className="animate-fade-in-slide-up bg-stone-500">{content}</Modal>
+    <Modal
+      className={
+        cartQuantity <= 0
+          ? 'animate-fade-in-slide-up bg-stone-500'
+          : 'animate-fade-in-slide-up '
+      }
+    >
+      {content}
+    </Modal>
   );
 }
 

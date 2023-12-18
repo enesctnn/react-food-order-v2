@@ -12,9 +12,8 @@ export default function Header() {
 
   let isLoggedIn = useRouteLoaderData('root');
 
-  function handleActiveLink({ isActive }) {
-    return isActive ? 'underline decoration-2' : '';
-  }
+  const handleActiveLink = ({ isActive }) =>
+    isActive ? 'underline decoration-2' : '';
 
   function handleLogout() {
     submit(null, { method: 'POST', action: '/logout' });
@@ -51,14 +50,14 @@ export default function Header() {
             </NavLink>
           )}
           {isLoggedIn && (
-            <p className="absolute top-8 right-8 group">
+            <div className="absolute top-8 right-8 group">
               <button onClick={handleLogout}>
                 <BiLogOutCircle size={26} />
               </button>
               <div className="scale-0 group-hover:scale-100 text-gray-600 absolute -left-4 font-bold duration-100">
                 Logout
               </div>
-            </p>
+            </div>
           )}
           <NavLink to="/foods" className={handleActiveLink}>
             FOODS

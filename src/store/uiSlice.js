@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  isCartOpen: false,
+  isModalOpen: false,
 };
 
 const uiSlice = createSlice({
@@ -9,10 +9,10 @@ const uiSlice = createSlice({
   initialState,
   reducers: {
     openModal: (state) => {
-      state.isCartOpen = true;
+      state.isModalOpen = true;
     },
     closeModal: (state) => {
-      state.isCartOpen = false;
+      state.isModalOpen = false;
     },
   },
 });

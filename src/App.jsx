@@ -15,6 +15,8 @@ import SignUpPage from './pages/SignUp';
 import FoodsPage from './pages/Food';
 import auth from './ui/auth';
 import { action as logoutAction } from './ui/Logout';
+import AdminPage from './pages/Admin';
+import { getIsAdmin as isAdminLoader } from './ui/user-data';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +28,7 @@ const router = createBrowserRouter(
       loader={auth}
     >
       <Route index element={<HomePage />} />
+      <Route path="admin" element={<AdminPage />} loader={isAdminLoader} />
       <Route path="foods" element={<FoodsPage />} />
       <Route path="login" element={<LoginPage />} action={loginAction} />
       <Route path="sign-up" element={<SignUpPage />} />

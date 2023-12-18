@@ -7,14 +7,14 @@ function Modal({ children, className }) {
   const dialog = useRef();
 
   const dispatch = useDispatch();
-  const { isCartOpen } = useSelector((state) => state.ui);
+  const { isModalOpen } = useSelector((state) => state.ui);
 
   useEffect(() => {
     const modal = dialog.current;
-    if (isCartOpen) {
+    if (isModalOpen) {
       modal.showModal();
     }
-  }, [isCartOpen]);
+  }, [isModalOpen]);
 
   function handleModalClose() {
     dialog.current.close();
