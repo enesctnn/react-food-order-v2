@@ -19,11 +19,13 @@ export default function LoginPage() {
       <div className="flex flex-col gap-5 py-3 px-8 shadow-lg shadow-stone-700">
         <Input name="email" label="E-mail" type="email" required />
         <Input name="password" label="Password" type="password" required />
-        <div className="text-right">
+        <div className="flex items-center justify-end gap-2">
           <Link to="/sign-up" className="font-bold text-xl">
             Sign Up
           </Link>
-          <Button className="ml-5 text-xl bg-stone-300">Login</Button>
+          <Button className="ml-5 text-xl bg-stone-300 hover:bg-stone-400">
+            Login
+          </Button>
         </div>
       </div>
     </Form>

@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 
 export default function MealItem({ food }) {
   const dispatch = useDispatch();
-  function handleAddItem(item) {
-    dispatch(cartActions.addToCart({ item }));
+  function handleAddItem() {
+    dispatch(cartActions.addToCart({ item: food, id: food.id }));
   }
   return (
     <li className="text-white rounded-2xl overflow-hidden shadow-lg text-center bg-[#1d1a16]">
@@ -24,8 +24,8 @@ export default function MealItem({ food }) {
         <div className="mb-10 rounded-md overflow-hidden">
           <Button
             key={food.id}
-            onClick={() => handleAddItem(food)}
-            className="bg-yellow-500"
+            onClick={handleAddItem}
+            className=" bg-yellow-500"
           >
             Add to Cart
           </Button>

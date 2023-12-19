@@ -3,12 +3,17 @@ import Button from './UI/Button';
 import CartItem from './CartItem';
 import { cartActions } from '../store/cartSlice';
 import Modal from './UI/Modal';
+import { useState } from 'react';
+import SubmitOrder from './UI/SubmitOrder';
 
 function Cart({ cartQuantity }) {
   const dispatch = useDispatch();
-
+  const [isOrdering, setIsOrdering] = useState(false);
   const { cart } = useSelector((state) => state.cart);
-
+  let modalStyle =
+    cartQuantity <= 0
+      ? 'animate-fade-in-slide-up bg-stone-500 '
+      : 'animate-fade-in-slide-up ';
   const total = cart.reduce(
     (totalPrice, item) =>
       (totalPrice += Number(item.price) * item.quantity * 100),
@@ -38,12 +43,19 @@ function Cart({ cartQuantity }) {
         </ul>
       </section>
       <form method="dialog" className="text-right ">
-        <p className="p-1 font-bold text-green-500 text-lg hover:underline">
-          ${(total / 100).toFixed(2)}
+        <p className="p-1 font-bold text-red-800 select-none">
+          Total Cost:
+          <span className="text-green-500 text-lg hover:underline ml-2 cursor-pointer">
+            ${(total / 100).toFixed(2)}
+          </span>
         </p>
-        <Button textOnly>Close</Button>
-        <Button type="button" className="ml-5 bg-yellow-400">
-          Submit
+        <Button textOnly>Cancel</Button>
+        <Button
+          onClick={() => setIsOrdering(true)}
+          type="button"
+          className=" ml-5 bg-yellow-400"
+        >
+          Continue
         </Button>
       </form>
     </>
@@ -69,17 +81,15 @@ function Cart({ cartQuantity }) {
       </>
     );
   }
-  return (
-    <Modal
-      className={
-        cartQuantity <= 0
-          ? 'animate-fade-in-slide-up bg-stone-500'
-          : 'animate-fade-in-slide-up '
-      }
-    >
-      {content}
-    </Modal>
-  );
+  function onClose() {
+    setIsOrdering(false);
+  }
+  if (isOrdering) {
+    content = <SubmitOrder onClose={onClose} totalPrice={total} />;
+    modalStyle = 'animate-fade-slide-in-from-right bg-stone-600';
+  }
+
+  return <Modal className={modalStyle}>{content}</Modal>;
 }
 
 export default Cart;

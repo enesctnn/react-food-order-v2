@@ -1,12 +1,16 @@
 function Input({ name, label, className, textarea, ...props }) {
-  const style = `bg-yellow-100 bg-opacity-80 outline-none pl-1 focus:shadow-inner focus:shadow-yellow-950 rounded-sm  ${className}`;
+  const inputStyle = `bg-yellow-100 bg-opacity-80 outline-none pl-1 focus:shadow-inner focus:shadow-yellow-950 rounded-sm  ${className}`;
   let input = (
-    <input {...props} name={name} className={style + ' duration-300'} />
+    <input {...props} name={name} className={inputStyle + ' duration-300'} />
   );
 
   if (textarea) {
     input = (
-      <textarea {...props} name={name} className={style + ' duration-75'} />
+      <textarea
+        {...props}
+        name={name}
+        className={inputStyle + ' duration-75'}
+      />
     );
   }
 

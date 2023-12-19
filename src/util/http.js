@@ -34,6 +34,7 @@ export async function userLogin({ email, password }) {
 
   return {
     role: existingUserData.role,
+    email: existingUserData.email,
     'user-name': existingUserData['user-name'],
     'postal-code': existingUserData['postal-code'],
     adress: existingUserData.adress,
