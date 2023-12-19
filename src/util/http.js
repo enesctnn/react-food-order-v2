@@ -1,4 +1,5 @@
 import { QueryClient } from '@tanstack/react-query';
+import { userExistsChecker } from '../ui/existing-user';
 
 export const queryClient = new QueryClient();
 
@@ -43,7 +44,7 @@ export async function userLogin({ email, password }) {
 }
 
 export async function signUpUser({ user, id }) {
-  const userExistMessage = await userExistChecker({ email: user.email });
+  const userExistMessage = await userExistsChecker({ email: user.email });
   if (!userExistMessage) {
     const response = await fetch('http://localhost:3000/users', {
       method: 'POST',
@@ -59,24 +60,6 @@ export async function signUpUser({ user, id }) {
     }
   }
   throw new Error(userExistMessage);
-}
-
-export async function userExistChecker({ email }) {
-  const url = 'http://localhost:3000/users?email=' + email;
-  try {
-    const response = await fetch(url);
-    const resData = await response.json();
-    if (!response.ok) {
-      throw new Error('An Error occurred during user fetch');
-    }
-    if (resData[0]) {
-      return 'This email adress is already in use!';
-    }
-    return null;
-  } catch (error) {
-    window.alert('User matching failed:' + error.message);
-  }
-  return null;
 }
 
 export async function getUsersData({ signal }) {
