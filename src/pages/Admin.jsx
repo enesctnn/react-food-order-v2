@@ -2,6 +2,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getUsersData } from '../util/http';
 import { MdSubdirectoryArrowRight } from 'react-icons/md';
+import Users from '../components/Users';
 
 function AdminPage() {
   const isAdmin = useLoaderData();
@@ -11,10 +12,22 @@ function AdminPage() {
   });
   console.log(data);
   let content = (
-    <ul className="bg-slate-500 px-5 py-10 flex flex-col rounded-md ">
-      {!isPending &&
-        data.map((user) => <li key={user.id}>{user['user-name']}</li>)}
-    </ul>
+    <>
+      {isPending && <h1>User Data is Loading...</h1>}
+      {data && (
+        <ul className="bg-slate-500 px-5 py-10 flex flex-col rounded-md gap-10">
+          <div className="flex justify-between">
+            <div>USER NAME</div>
+            <div>Email</div>
+            <div>Role</div>
+            <div>Password</div>
+          </div>
+          {data.map((user) => (
+            <Users key={user.id} user={user} />
+          ))}
+        </ul>
+      )}
+    </>
   );
   if (!isAdmin) {
     content = (
