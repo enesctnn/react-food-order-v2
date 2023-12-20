@@ -30,8 +30,8 @@ export default function ErrorPage() {
               size={40}
               className="hover:scale-125 active:scale-150 duration-100"
             />
-            <div className="scale-0 absolute -left-3 -bottom-8 font-bold text-yellow-900 whitespace-nowrap group-hover:scale-100 duration-100">
-              Go Home
+            <div className="scale-0 absolute -left-7 -bottom-8 font-bold text-yellow-900 whitespace-nowrap group-hover:scale-100 duration-100">
+              Go to Home
             </div>
           </Link>
         </div>
