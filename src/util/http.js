@@ -22,26 +22,27 @@ export async function fetchFoods({ signal, searchTerm }) {
 }
 
 export async function userLogin({ email, password }) {
-  const response = await fetch('http://localhost:3000/users');
+  const response = await fetch('http://localhost:3000/users?email=' + email);
   const resData = await response.json();
   if (!response.ok) {
     throw new Error('Could not reach User Info');
   }
-
   const existingUserData = resData.filter(
-    (user) => user.email === email && user.password === password
+    (user) => user.password === password
   )[0];
-
-  return {
-    role: existingUserData.role,
-    email: existingUserData.email,
-    'user-name': existingUserData['user-name'],
-    'postal-code': existingUserData['postal-code'],
-    adress: existingUserData.adress,
-    city: existingUserData.city,
-    street: existingUserData.street,
-    'user-id': existingUserData.id,
-  };
+  if (existingUserData) {
+    return {
+      role: existingUserData.role,
+      email: existingUserData.email,
+      'user-name': existingUserData['user-name'],
+      'postal-code': existingUserData['postal-code'],
+      adress: existingUserData.adress,
+      city: existingUserData.city,
+      street: existingUserData.street,
+      'user-id': existingUserData.id,
+    };
+  }
+  throw new Error('Invalid Email or Password');
 }
 
 export async function signUpUser({ user, id }) {
