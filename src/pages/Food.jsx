@@ -1,4 +1,4 @@
-import MealItems from '../components/MealItems';
+import MealItems from '../components/Meal/MealItems';
 
 function FoodsPage() {
   return <MealItems />;

@@ -1,6 +1,6 @@
-import getUserData from '../../ui/user-data';
-import Button from './Button';
-import Input from './Input';
+import getUserData from '../ui/user-data';
+import Button from './UI/Button';
+import Input from './UI/Input';
 
 function SubmitOrder({ onClose, totalPrice }) {
   const user = getUserData() || null;

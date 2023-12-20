@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import MealItem from './MealItem';
-import { fetchFoods } from '../util/http';
+import { fetchFoods } from '../../util/http';
 
 export default function MealItems() {
   const { data, isError, error, isPending } = useQuery({

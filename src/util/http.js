@@ -73,3 +73,14 @@ export async function getUsersData({ signal }) {
 }
 
 export async function addOrder() {}
+
+export async function updateUserData({ userData, id }) {
+  const response = await fetch('http://localhost:3000/users/' + id, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(userData),
+  });
+  if (!response.ok) {
+    throw new Error('Updateing user went wrong!');
+  }
+}

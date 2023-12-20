@@ -1,5 +1,5 @@
-import { cartActions } from '../store/cartSlice';
-import Button from './UI/Button';
+import { cartActions } from '../../store/cartSlice';
+import Button from '../UI/Button';
 import { useDispatch } from 'react-redux';
 
 export default function MealItem({ food }) {

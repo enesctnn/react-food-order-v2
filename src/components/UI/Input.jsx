@@ -16,9 +16,11 @@ function Input({ name, label, className, textarea, ...props }) {
 
   return (
     <section className="flex flex-col gap-1 ">
-      <label htmlFor={name} className="text-xl text-yellow-200 font-bold">
-        {label} :
-      </label>
+      {label && (
+        <label htmlFor={name} className="text-xl text-yellow-200 font-bold">
+          {label} :
+        </label>
+      )}
       {input}
     </section>
   );

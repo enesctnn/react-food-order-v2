@@ -4,7 +4,7 @@ import CartItem from './CartItem';
 import { cartActions } from '../store/cartSlice';
 import Modal from './UI/Modal';
 import { useState } from 'react';
-import SubmitOrder from './UI/SubmitOrder';
+import SubmitOrder from './SubmitOrder';
 
 function Cart({ cartQuantity }) {
   const dispatch = useDispatch();

@@ -1,5 +1,6 @@
 import { Link, useRouteError } from 'react-router-dom';
 import Header from '../components/Header';
+
 import { IoFastFoodOutline } from 'react-icons/io5';
 
 export default function ErrorPage() {
