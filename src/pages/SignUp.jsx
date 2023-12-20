@@ -19,6 +19,7 @@ export default function SignUpPage() {
     const fd = new FormData(event.target);
     const formData = Object.fromEntries(fd);
     mutate({ user: { ...formData }, id: Date.now() });
+    localStorage.setItem('USER_DATA',JSON.stringify())
   }
   if (isError) {
     throw new Error(error);

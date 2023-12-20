@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
 
-import { queryClient, updateUserData } from '../../util/http';
+import { deleteUser, queryClient, updateUserData } from '../../util/http';
 
 import { FaCheck } from 'react-icons/fa';
 import { MdModeEditOutline } from 'react-icons/md';
@@ -14,32 +14,42 @@ function User({ user }) {
   const userPasswordRef = useRef();
   const userRoleRef = useRef();
 
-  const { mutate, isPending } = useMutation({
+  const { mutate: deleteUserFn } = useMutation({
+    mutationFn: deleteUser,
+    onSuccess: async () => {
+      window.alert('User succesfully deleted');
+      await queryClient.invalidateQueries({ queryKey: ['users'] });
+    },
+  });
+
+  const { mutate: updateUser, isPending } = useMutation({
     mutationFn: updateUserData,
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['users'],
-      });
+      queryClient.invalidateQueries({ queryKey: ['users'] });
     },
   });
 
   function updateUserHandler(id) {
-    const isConfirm = window.confirm(
-      'This proccess can not be undone are you sure you want to update the user'
-    );
     const userData = {
       'user-name': userNameRef.current.value,
       email: userEmailRef.current.value,
       password: userPasswordRef.current.value,
       role: userRoleRef.current.value.toUpperCase(),
     };
-    if (isConfirm) {
-      mutate({ userData, id });
-    }
+
+    updateUser({ userData, id });
 
     setIsEditing(false);
   }
 
+  function deleteUserHandler() {
+    const isConfirm = window.confirm(
+      'This proccess can not be undone are you sure you want to delete the user'
+    );
+    if (isConfirm) {
+      deleteUserFn({ id: user.id });
+    }
+  }
   let content = (
     <>
       <td className="capitalize">{user['user-name']}</td>
@@ -56,7 +66,7 @@ function User({ user }) {
       >
         <MdModeEditOutline />
       </button>
-      <button className="hover:drop-shadow-md">
+      <button className="hover:drop-shadow-md" onClick={deleteUserHandler}>
         <FaTrashAlt />
       </button>
     </td>
@@ -69,7 +79,6 @@ function User({ user }) {
           <input
             ref={userNameRef}
             className="max-w-[8rem] pl-1 rounded-sm"
-            required
             defaultValue={user['user-name']}
           />
         </td>
@@ -77,7 +86,6 @@ function User({ user }) {
           <input
             ref={userEmailRef}
             className="max-w-[17rem] pl-1 rounded-sm"
-            required
             defaultValue={user['email']}
           />
         </td>
@@ -99,7 +107,6 @@ function User({ user }) {
           <input
             ref={userPasswordRef}
             className="w-20 text-center"
-            required
             defaultValue={user['password']}
           />
         </td>
@@ -119,9 +126,11 @@ function User({ user }) {
   }
 
   if (isPending) {
-    <td>
-      <h2 className="text-center">Submitting . . .</h2>
-    </td>;
+    return (
+      <td>
+        <h2 className="text-center">Submitting . . .</h2>
+      </td>
+    );
   }
 
   return (

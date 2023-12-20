@@ -42,7 +42,7 @@ export async function userLogin({ email, password }) {
       'user-id': existingUserData.id,
     };
   }
-  throw new Error('Invalid Email or Password');
+  return null;
 }
 
 export async function signUpUser({ user, id }) {
@@ -60,6 +60,7 @@ export async function signUpUser({ user, id }) {
     if (!response.ok) {
       throw new Error('Could not Sign Up the user');
     }
+    return;
   }
   throw new Error(userExistMessage);
 }
@@ -83,5 +84,13 @@ export async function updateUserData({ userData, id }) {
   });
   if (!response.ok) {
     throw new Error('Updateing user went wrong!');
+  }
+}
+export async function deleteUser({ id }) {
+  const response = await fetch('http://localhost:3000/users/' + id, {
+    method: 'DELETE',
+  });
+  if (!response.ok) {
+    throw new Error('Could not Delete the user');
   }
 }

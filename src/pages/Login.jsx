@@ -39,7 +39,7 @@ export async function action({ request, params }) {
     password: formData.get('password'),
   });
 
-  localStorage.setItem('USER_DATA', JSON.stringify(userData));
+    localStorage.setItem('USER_DATA', JSON.stringify(userData));
 
   return redirect('/foods');
 }
